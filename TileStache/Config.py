@@ -435,8 +435,12 @@ def _parseConfigfileLayer(layer_dict, config, dirpath):
             pixel_effect_kwargs = {}
             for k, v in pixel_effect_dict.items():
                 if k != 'name':
+                    # assumes all effect parameters other then `name` are
+                    # actually floats.
                     pixel_effect_kwargs[str(k)] = float(v)
+            # Get a reference to the effect class
             PixelEffectClass = PixelEffects.all[pixel_effect_name]
+            # Instantiate the class with config arguments
             pixel_effect = PixelEffectClass(**pixel_effect_kwargs)
     #
     # Do the provider

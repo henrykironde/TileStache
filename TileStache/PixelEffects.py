@@ -54,7 +54,7 @@ Options are:
     }
 """
 
-from PIL import Image, ImageFilter
+from PIL import Image, ImageFilter, ImageOps
 
 
 def put_original_alpha(original_image, new_image):
@@ -78,6 +78,8 @@ class PixelEffect:
     def __init__(self):
         pass
 
+    # This method is called by render() in core.py.
+    # Each actual pixel effect implementation subclasses from this base class.
     def apply(self, image):
         try:
             image = image.image()  # Handle Providers.Verbatim tiles
@@ -161,7 +163,24 @@ class Blur(PixelEffect):
     def apply_effect(self, image):
         return image.filter(ImageFilter.GaussianBlur(self.radius))
 
+class Solarize(PixelEffect):
+    """
+    Solarizes an image given a certain threshold:
 
+    https://github.com/python-pillow/Pillow/blob/master/PIL/ImageOps.py#L396-L410
+    """
+    def __init__(self, threshold=128):
+        self.threshold = threshold
+
+    def apply_effect(self, image):
+        # Need to convert to RGB or L image modes.
+        # See: https://github.com/python-pillow/Pillow/blob/master/PIL/ImageOps.py#L47-L56
+        # And: http://effbot.org/imagingbook/decoder.htm
+        image = image.convert("RGB")
+        return ImageOps.solarize(image, self.threshold)
+
+# Module level attribute mapping effect names as strings to classes.
+# Used in config.py
 all = {
     'blackwhite': Blackwhite,
     'greyscale': Greyscale,
@@ -169,4 +188,5 @@ all = {
     'pixelate': Pixelate,
     'halftone': Halftone,
     'blur': Blur,
+    'solarize': Solarize
 }
