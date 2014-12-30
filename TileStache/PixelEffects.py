@@ -188,25 +188,21 @@ class Shredder(PixelEffect):
 
     def apply_effect(self, image):
 
-        # If random number is even, shred the tile.
-        if randint(1, 10) % 2 == 0:
-            # Randomly generate shreds.
-            SHREDS = randint(1, 10)
-            shredded = Image.new("RGBA", image.size)
-            width, height = image.size
-            shred_width = width/SHREDS
-            sequence = range(0, SHREDS)
-            shuffle(sequence)
+        # Randomly generate shreds.
+        SHREDS = randint(3, 10)
+        shredded = Image.new("RGBA", image.size)
+        width, height = image.size
+        shred_width = width/SHREDS
+        sequence = range(0, SHREDS)
+        shuffle(sequence)
 
-            for i, shred_index in enumerate(sequence):
-                shred_x1, shred_y1 = shred_width * shred_index, 0
-                shred_x2, shred_y2 = shred_x1 + shred_width, height
-                region = image.crop((shred_x1, shred_y1, shred_x2, shred_y2))
-                shredded.paste(region, (shred_width * i, 0))
+        for i, shred_index in enumerate(sequence):
+            shred_x1, shred_y1 = shred_width * shred_index, 0
+            shred_x2, shred_y2 = shred_x1 + shred_width, height
+            region = image.crop((shred_x1, shred_y1, shred_x2, shred_y2))
+            shredded.paste(region, (shred_width * i, 0))
 
-            return shredded
-        else:
-            return image
+        return shredded
 
 
 class Multiball(PixelEffect):
