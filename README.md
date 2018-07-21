@@ -1,4 +1,4 @@
-#TileStache
+# TileStache
 
 _a stylish alternative for caching your map tiles_
 
@@ -33,14 +33,14 @@ simpler and better-suited to the needs of designers and cartographers.
 
 
 
-##Dependencies
+## Dependencies
 
-###Required:
+### Required:
 
 - ModestMaps: http://modestmaps.com, http://github.com/migurski/modestmaps-py
 - Python Imaging Library (PIL): http://www.pythonware.com/products/pil
 
-###Optional:
+### Optional:
 
 - Simplejson: https://github.com/simplejson/simplejson (optional if using >= python 2.6)
 - mapnik: http://mapnik.org (optional)
@@ -60,7 +60,7 @@ Install Mapnik via instructions at:
     http://mapnik.org/download
 
 
-##Installation
+## Installation
 
 TileStache can be run from the download directory as is. For example the scripts:
 
@@ -78,7 +78,7 @@ To install globally do:
 to fully install TileStache.
 
 
-##Quickstart
+## Quickstart
 
 To make sure TileStache is working start the development server:
 
@@ -92,7 +92,7 @@ This is a previewer that uses ModestMaps and OpenStreetMap tiles from
 http://tile.osm.org as defined in the default config file 'tilestache.cfg'
 
 
-##Documentation
+## Documentation
 
 The next step is to learn how build custom layers and serve them.
 
@@ -114,7 +114,7 @@ Caching backends:
 * S3
 
 
-##Design Goals
+## Design Goals
 
 The design of TileStache focuses on approachability at the expense of
 cleverness or completeness. Our hope is to make it easy for anyone to design
@@ -147,6 +147,6 @@ necessary to support any external system, but we eschew complex, impenetrable
 standards in favor of pragmatic, fast utility with basic web clients.
 
 
-##License
+## License
 
 BSD, see LICENSE file.
